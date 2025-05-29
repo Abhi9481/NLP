@@ -1,0 +1,73 @@
+# Sentence Tokenization
+import nltk
+nltk.download('punkt')
+
+from nltk.tokenize import sent_tokenize
+
+def tokenize_sentences(text):
+    sentences = sent_tokenize(text)
+    return sentences
+
+text = "NLTK is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources such as WordNet, along with a suite of text processing libraries for classification, tokenization, stemming, tagging, parsing, and semantic reasoning, wrappers for industrial-strength NLP libraries, and an active discussion forum."
+
+sentences = tokenize_sentences(text)
+
+for i, sentence in enumerate(sentences):
+    print(f"Sentence {i+1}: {sentence}")
+
+#Word Tokenization
+import nltk
+nltk.download('punkt')
+
+from nltk.tokenize import word_tokenize
+
+def tokenize_words(text):
+    words = word_tokenize(text)
+    return words
+
+text = "NLTK is a leading platform for building Python programs to work with human language data."
+
+words = tokenize_words(text)
+
+print(words)
+
+# stopwords using NLTK
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+nltk.download('stopwords')
+nltk.download('punkt')
+
+def remove_stopwords(text):
+    words = word_tokenize(text)
+    english_stopwords = set(stopwords.words('english'))
+    filtered_words = [word for word in words if word.lower() not in english_stopwords]
+    filtered_text = ' '.join(filtered_words)
+    return filtered_text
+
+text = "NLTK is a leading platform for building Python programs to work with human language data."
+
+filtered_text = remove_stopwords(text)
+
+print(filtered_text)
+
+#stemming using NLTK
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+
+nltk.download('punkt')
+
+def stem_text(text):
+    porter_stemmer = PorterStemmer()
+    words = word_tokenize(text)
+    stemmed_words = [porter_stemmer.stem(word) for word in words]
+    stemmed_text = ' '.join(stemmed_words)
+    return stemmed_text
+
+text = "NLTK is a leading platform for building Python programs to work with human language data."
+
+stemmed_text = stem_text(text)
+
+print(stemmed_text)
