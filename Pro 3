@@ -1,0 +1,48 @@
+# Program for Chunking
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag, RegexpParser
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+def chunk_sentence(sentence):
+    words = word_tokenize(sentence)
+    tagged_words = pos_tag(words)
+    grammar = r"""
+    NP: {<DT|JJ|NN.*>+}
+    PP: {<IN><NP>}
+    VP: {<VB.*><NP|PP|CLAUSE>+$}
+    CLAUSE: {<NP><VP>}
+    """
+    parser = RegexpParser(grammar)
+    chunked_sentence = parser.parse(tagged_words)
+    return chunked_sentence
+
+sentence = "The quick brown fox jumps over the lazy dog"
+
+chunked_sentence = chunk_sentence(sentence)
+
+print(chunked_sentence)
+
+# Named Entity Recognition using NLTK
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag, ne_chunk
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+
+def ner(text):
+    words = word_tokenize(text)
+    tagged_words = pos_tag(words)
+    named_entities = ne_chunk(tagged_words)
+    return named_entities
+
+text = "Apple is a company based in California, United States. Steve Jobs was one of its founders."
+
+named_entities = ner(text)
+
+print(named_entities)
